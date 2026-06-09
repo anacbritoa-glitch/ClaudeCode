@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VirtuAlly Partners – Virtual Assistant Services</title>
+
+  <!-- Google Fonts: Source Serif 4 (headers) + Host Grotesk (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ─── RESET & TOKENS ─────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --c-primary:   #00B0C8;
+      --c-secondary: #098FA0;
+      --c-dark:      #0D1821;
+      --c-white:     #FFFFFF;
+      --c-light-bg:  #F2FAFB;
+      --c-border:    #DDF0F3;
+      --c-text:      #2C3E50;
+      --c-muted:     #6B7A8D;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Host Grotesk', sans-serif;
+      color: var(--c-text);
+      line-height: 1.7;
+      background: var(--c-white);
+    }
+
+    h1, h2, h3, h4 { font-family: 'Source Serif 4', serif; }
+
+    img { display: block; max-width: 100%; }
+
+    /* ─── NAVIGATION ─────────────────────────────────────── */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      height: 72px;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      transition: box-shadow 0.3s;
+    }
+
+    .nav-logo img { height: 42px; width: auto; }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-weight: 500; font-size: 0.93rem;
+      color: var(--c-dark); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--c-primary); }
+
+    .nav-cta {
+      background: var(--c-primary) !important;
+      color: var(--c-white) !important;
+      padding: 10px 22px; border-radius: 7px;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--c-secondary) !important; }
+
+    /* hamburger */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--c-dark); border-radius: 2px; transition: all 0.3s;
+    }
+
+    /* mobile menu */
+    #mobileMenu {
+      display: none; flex-direction: column;
+      position: fixed; top: 72px; left: 0; right: 0; z-index: 999;
+      background: var(--c-white);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+      padding: 8px 5% 20px;
+    }
+    #mobileMenu.open { display: flex; }
+    #mobileMenu a {
+      padding: 14px 0; font-weight: 500; font-size: 0.97rem;
+      color: var(--c-dark); text-decoration: none;
+      border-bottom: 1px solid #f2f2f2;
+      transition: color 0.2s;
+    }
+    #mobileMenu a:last-child { border-bottom: none; color: var(--c-primary); font-weight: 700; }
+    #mobileMenu a:hover { color: var(--c-primary); }
+
+    /* ─── HERO ───────────────────────────────────────────── */
+    #home {
+      min-height: 100vh;
+      background: linear-gradient(140deg, #081420 0%, #0D1821 55%, #0a2233 100%);
+      display: flex; align-items: center;
+      padding: 110px 5% 72px;
+      position: relative; overflow: hidden;
+    }
+
+    #home::before {
+      content: '';
+      position: absolute; top: -40%; right: -15%;
+      width: 65%; height: 130%;
+      background: radial-gradient(ellipse, rgba(0,176,200,.13) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    #home::after {
+      content: '';
+      position: absolute; bottom: -25%; left: -8%;
+      width: 45%; height: 70%;
+      background: radial-gradient(ellipse, rgba(9,143,160,.09) 0%, transparent 68%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1180px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 56px;
+      align-items: center; position: relative; z-index: 1;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(0,176,200,.14); border: 1px solid rgba(0,176,200,.3);
+      color: var(--c-primary); padding: 6px 16px; border-radius: 100px;
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.07em;
+      text-transform: uppercase; margin-bottom: 22px;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2.1rem, 3.8vw, 3.4rem);
+      color: var(--c-white); line-height: 1.15; margin-bottom: 22px;
+    }
+    .hero-text h1 span { color: var(--c-primary); }
+
+    .hero-text p {
+      font-size: 1.07rem; color: rgba(255,255,255,.72);
+      margin-bottom: 36px; max-width: 460px;
+    }
+
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: var(--c-primary); color: var(--c-white);
+      padding: 14px 28px; border-radius: 8px; text-decoration: none;
+      font-weight: 700; font-size: 0.97rem;
+      font-family: 'Host Grotesk', sans-serif;
+      border: none; cursor: pointer; display: inline-block;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover {
+      background: var(--c-secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(0,176,200,.32);
+    }
+
+    .btn-outline {
+      background: transparent; color: var(--c-white);
+      padding: 14px 28px; border-radius: 8px; text-decoration: none;
+      font-weight: 600; font-size: 0.97rem;
+      font-family: 'Host Grotesk', sans-serif;
+      border: 2px solid rgba(255,255,255,.28); cursor: pointer;
+      display: inline-block; transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--c-primary); color: var(--c-primary); }
+
+    /* hero card */
+    .hero-card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 18px; padding: 30px;
+      backdrop-filter: blur(10px);
+      max-width: 370px; width: 100%;
+      margin-left: auto;
+    }
+    .hero-card-label {
+      color: var(--c-primary); font-size: 0.76rem;
+      font-weight: 700; letter-spacing: 0.09em;
+      text-transform: uppercase; margin-bottom: 18px;
+    }
+    .hc-items { display: flex; flex-direction: column; gap: 12px; }
+    .hc-item {
+      display: flex; align-items: center; gap: 14px;
+      background: rgba(0,176,200,.08);
+      border: 1px solid rgba(0,176,200,.14);
+      border-radius: 10px; padding: 12px 16px;
+    }
+    .hc-icon {
+      width: 38px; height: 38px;
+      background: var(--c-primary); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .hc-item span { color: var(--c-white); font-size: 0.88rem; font-weight: 500; }
+
+    /* ─── STATS BAR ──────────────────────────────────────── */
+    #stats-bar {
+      background: var(--c-dark);
+      border-top: 1px solid rgba(255,255,255,.06);
+      padding: 32px 5%;
+    }
+    .stats-inner {
+      max-width: 1180px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+      text-align: center;
+    }
+    .stat-item { padding: 12px; }
+    .stat-num {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.9rem; font-weight: 700;
+      color: var(--c-primary); display: block;
+    }
+    .stat-lbl { color: rgba(255,255,255,.6); font-size: 0.83rem; margin-top: 4px; }
+
+    /* ─── SHARED SECTION STYLES ──────────────────────────── */
+    section { padding: 88px 5%; }
+
+    .sec-inner { max-width: 1180px; margin: 0 auto; }
+
+    .sec-tag {
+      display: inline-block;
+      background: rgba(0,176,200,.1); color: var(--c-secondary);
+      padding: 5px 15px; border-radius: 100px;
+      font-size: 0.76rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .sec-title {
+      font-size: clamp(1.8rem, 2.8vw, 2.7rem);
+      color: var(--c-dark); line-height: 1.2; margin-bottom: 14px;
+    }
+
+    .sec-sub {
+      font-size: 1.03rem; color: var(--c-muted);
+      max-width: 540px; margin-bottom: 52px; line-height: 1.75;
+    }
+
+    /* ─── SERVICES ───────────────────────────────────────── */
+    #services { background: var(--c-light-bg); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 22px;
+    }
+
+    .svc-card {
+      background: var(--c-white);
+      border: 1px solid var(--c-border);
+      border-radius: 16px; padding: 30px;
+      transition: box-shadow 0.3s, transform 0.3s, border-color 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .svc-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--c-primary), var(--c-secondary));
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .svc-card:hover {
+      box-shadow: 0 14px 44px rgba(0,176,200,.13);
+      transform: translateY(-4px);
+      border-color: rgba(0,176,200,.25);
+    }
+    .svc-card:hover::before { opacity: 1; }
+
+    .svc-icon {
+      width: 50px; height: 50px;
+      background: linear-gradient(135deg, var(--c-primary), var(--c-secondary));
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; margin-bottom: 18px;
+    }
+    .svc-card h3 { font-size: 1.15rem; color: var(--c-dark); margin-bottom: 10px; }
+    .svc-card p { font-size: 0.92rem; color: var(--c-muted); line-height: 1.75; }
+
+    /* ─── HOW IT WORKS ───────────────────────────────────── */
+    #how-it-works { background: var(--c-white); }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 28px;
+    }
+    .step-card {
+      text-align: center; padding: 32px 20px;
+      border: 1px solid var(--c-border); border-radius: 16px;
+      transition: box-shadow 0.3s, border-color 0.3s;
+    }
+    .step-card:hover {
+      box-shadow: 0 8px 32px rgba(0,176,200,.1);
+      border-color: rgba(0,176,200,.3);
+    }
+    .step-num {
+      width: 54px; height: 54px; margin: 0 auto 18px;
+      background: linear-gradient(135deg, var(--c-primary), var(--c-secondary));
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Source Serif 4', serif; font-size: 1.25rem;
+      font-weight: 700; color: var(--c-white);
+    }
+    .step-card h3 { font-size: 1.12rem; color: var(--c-dark); margin-bottom: 10px; }
+    .step-card p { font-size: 0.9rem; color: var(--c-muted); }
+
+    /* ─── ABOUT ──────────────────────────────────────────── */
+    #about { background: var(--c-light-bg); }
+
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 56px;
+      align-items: start;
+    }
+
+    .values-list { display: flex; flex-direction: column; gap: 18px; }
+
+    .val-item { display: flex; align-items: flex-start; gap: 14px; }
+
+    .val-icon {
+      width: 36px; height: 36px; flex-shrink: 0;
+      background: rgba(0,176,200,.1); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--c-primary); font-size: 1rem;
+    }
+    .val-text h4 { font-size: 0.98rem; color: var(--c-dark); margin-bottom: 3px; }
+    .val-text p { font-size: 0.87rem; color: var(--c-muted); }
+
+    .about-visual {
+      background: linear-gradient(140deg, var(--c-dark) 0%, #1a3046 100%);
+      border-radius: 20px; padding: 36px 32px; color: var(--c-white);
+    }
+    .about-visual h3 { font-size: 1.4rem; margin-bottom: 6px; }
+    .about-visual > p { color: rgba(255,255,255,.68); font-size: 0.93rem; margin-bottom: 24px; }
+
+    .results-list { display: flex; flex-direction: column; gap: 10px; }
+    .res-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 11px 15px;
+      background: rgba(255,255,255,.05);
+      border-left: 3px solid var(--c-primary);
+      border-radius: 0 8px 8px 0;
+    }
+    .res-check { color: var(--c-primary); font-weight: 700; flex-shrink: 0; }
+    .res-item span:last-child { font-size: 0.88rem; color: rgba(255,255,255,.84); }
+
+    /* ─── WHO WE SERVE ───────────────────────────────────── */
+    #clients { background: var(--c-white); }
+
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 18px;
+    }
+    .client-card {
+      text-align: center; padding: 26px 16px;
+      border: 1px solid var(--c-border); border-radius: 14px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .client-card:hover {
+      border-color: var(--c-primary);
+      box-shadow: 0 6px 24px rgba(0,176,200,.1);
+    }
+    .client-card .ci { font-size: 1.9rem; display: block; margin-bottom: 10px; }
+    .client-card p { font-weight: 600; color: var(--c-dark); font-size: 0.92rem; }
+
+    /* ─── QUOTE / CONTACT ────────────────────────────────── */
+    #contact {
+      background: linear-gradient(140deg, #081420 0%, var(--c-dark) 55%, #0a2233 100%);
+      text-align: center;
+    }
+
+    #contact .sec-title { color: var(--c-white); }
+    #contact .sec-sub { color: rgba(255,255,255,.68); margin-left: auto; margin-right: auto; }
+
+    .form-shell {
+      max-width: 620px; margin: 0 auto;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 20px; padding: 40px 36px;
+      backdrop-filter: blur(10px); text-align: left;
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .fgroup { margin-bottom: 18px; }
+    .fgroup label {
+      display: block; color: rgba(255,255,255,.78);
+      font-size: 0.84rem; font-weight: 600; margin-bottom: 7px;
+    }
+    .fgroup input,
+    .fgroup select,
+    .fgroup textarea {
+      width: 100%; padding: 11px 15px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 8px; color: var(--c-white);
+      font-family: 'Host Grotesk', sans-serif; font-size: 0.93rem;
+      transition: border-color 0.2s, background 0.2s; outline: none;
+    }
+    .fgroup input::placeholder,
+    .fgroup textarea::placeholder { color: rgba(255,255,255,.32); }
+    .fgroup input:focus,
+    .fgroup select:focus,
+    .fgroup textarea:focus {
+      border-color: var(--c-primary);
+      background: rgba(255,255,255,.1);
+    }
+    .fgroup select option { background: var(--c-dark); color: var(--c-white); }
+    .fgroup textarea { resize: vertical; min-height: 96px; }
+
+    .form-submit {
+      width: 100%; padding: 15px;
+      background: var(--c-primary); color: var(--c-white);
+      border: none; border-radius: 8px; cursor: pointer;
+      font-family: 'Host Grotesk', sans-serif;
+      font-size: 1rem; font-weight: 700; margin-top: 6px;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .form-submit:hover {
+      background: var(--c-secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(0,176,200,.3);
+    }
+
+    .field-error { border-color: #ff6b6b !important; }
+
+    #successMsg {
+      display: none; text-align: center;
+      padding: 28px 20px; color: var(--c-primary);
+      font-weight: 600; font-size: 1.1rem; line-height: 1.6;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer {
+      background: #07101a;
+      color: rgba(255,255,255,.58);
+      padding: 52px 5% 28px;
+    }
+
+    .footer-inner { max-width: 1180px; margin: 0 auto; }
+
+    .footer-top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px;
+      margin-bottom: 40px;
+    }
+
+    .footer-brand img { height: 38px; margin-bottom: 14px; }
+    .footer-brand p { font-size: 0.88rem; line-height: 1.75; max-width: 270px; }
+
+    .footer-col h4 {
+      font-family: 'Source Serif 4', serif;
+      color: var(--c-white); font-size: 0.97rem; margin-bottom: 14px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .footer-col ul a {
+      color: rgba(255,255,255,.58); text-decoration: none;
+      font-size: 0.88rem; transition: color 0.2s;
+    }
+    .footer-col ul a:hover { color: var(--c-primary); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.07);
+      padding-top: 22px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.83rem; flex-wrap: wrap; gap: 8px;
+    }
+    .footer-bottom a { color: var(--c-primary); text-decoration: none; }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 960px) {
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .hero-text p { margin: 0 auto 36px; }
+      .hero-btns { justify-content: center; }
+      .hero-card { display: none; }
+
+      .about-grid { grid-template-columns: 1fr; }
+
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      section { padding: 64px 5%; }
+      .form-row { grid-template-columns: 1fr; }
+      .form-shell { padding: 28px 20px; }
+    }
+
+    @media (max-width: 500px) {
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════════════════ -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <a href="#home">
+      <!-- Upload your logo to WordPress Media Library, then replace the src below -->
+      <img
+        src="virtually-partners-logo.png"
+        alt="VirtuAlly Partners"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+      />
+      <!-- Fallback text logo if image not found -->
+      <span style="display:none; font-family:'Source Serif 4',serif; font-size:1.2rem; font-weight:700; color:#0D1821;">
+        Virtu<span style="color:#00B0C8;">Ally</span> Partners
+      </span>
+    </a>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#clients">Who We Serve</a></li>
+    <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+  </ul>
+
+  <button class="hamburger" id="hamburgerBtn" aria-label="Open navigation menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobileMenu">
+  <a href="#home">Home</a>
+  <a href="#services">Services</a>
+  <a href="#how-it-works">How It Works</a>
+  <a href="#about">About</a>
+  <a href="#clients">Who We Serve</a>
+  <a href="#contact">Get a Quote &rarr;</a>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════════ -->
+<section id="home">
+  <div class="hero-inner">
+    <!-- Left: Text -->
+    <div class="hero-text">
+      <span class="hero-tag">Virtual Assistant Services</span>
+      <h1>Your Operations,<br><span>Handled with Care.</span></h1>
+      <p>VirtuAlly Partners delivers flexible, reliable virtual assistance so you can focus on what grows your business — not what slows it down.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary">Request a Free Quote</a>
+        <a href="#services" class="btn-outline">Explore Services</a>
+      </div>
+    </div>
+
+    <!-- Right: Feature Card (hidden on mobile) -->
+    <div class="hero-card">
+      <div class="hero-card-label">What we take off your plate</div>
+      <div class="hc-items">
+        <div class="hc-item">
+          <div class="hc-icon">📅</div>
+          <span>Calendar &amp; email management</span>
+        </div>
+        <div class="hc-item">
+          <div class="hc-icon">📊</div>
+          <span>Data entry &amp; reporting</span>
+        </div>
+        <div class="hc-item">
+          <div class="hc-icon">💬</div>
+          <span>Customer support &amp; follow-ups</span>
+        </div>
+        <div class="hc-item">
+          <div class="hc-icon">📱</div>
+          <span>Social media coordination</span>
+        </div>
+        <div class="hc-item">
+          <div class="hc-icon">⚙️</div>
+          <span>Automation &amp; AI-powered tools</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     STATS BAR
+════════════════════════════════════════════════════ -->
+<div id="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-num">From $5/hr</span>
+      <p class="stat-lbl">Flexible, accessible pricing</p>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">100%</span>
+      <p class="stat-lbl">Remote &amp; flexible model</p>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">7+</span>
+      <p class="stat-lbl">Service categories available</p>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">Zero</span>
+      <p class="stat-lbl">Long-term contracts required</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     SERVICES
+════════════════════════════════════════════════════ -->
+<section id="services">
+  <div class="sec-inner">
+    <span class="sec-tag">What We Do</span>
+    <h2 class="sec-title">Virtual Assistance Built<br>Around Your Needs</h2>
+    <p class="sec-sub">From daily admin tasks to digital coordination — we handle what slows you down so you can focus on what moves you forward.</p>
+
+    <div class="services-grid">
+
+      <div class="svc-card">
+        <div class="svc-icon">🗂️</div>
+        <h3>Administrative Support</h3>
+        <p>Document management, database updates, report preparation, digital file organization, and general internal process support — handled efficiently and consistently.</p>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon">📧</div>
+        <h3>Email &amp; Calendar Management</h3>
+        <p>Inbox organization, meeting scheduling, appointment confirmation, reminders, and daily commitment management so nothing falls through the cracks.</p>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon">💬</div>
+        <h3>Customer Support &amp; Operations</h3>
+        <p>Client communication, request follow-ups, basic responses, and operational coordination to keep your customer experience timely and consistent.</p>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon">📊</div>
+        <h3>Data Entry &amp; Information Management</h3>
+        <p>Data recording, updating, reviewing, and structuring in spreadsheets, CRMs, and internal platforms — accurate and organized at all times.</p>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon">📱</div>
+        <h3>Marketing &amp; Social Media Support</h3>
+        <p>Content scheduling, caption support, engagement tracking, basic research, and coordination of digital materials across your social channels.</p>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon">🤝</div>
+        <h3>Vendor &amp; Task Coordination</h3>
+        <p>Supplier follow-ups, invoice tracking, delivery coordination, pending items management, and operational task support across your business.</p>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon">⚙️</div>
+        <h3>Automation &amp; AI-Powered Tools</h3>
+        <p>Implementation and support of digital tools and AI-driven solutions that streamline repetitive tasks — always with human oversight and a practical, results-focused approach.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     HOW IT WORKS
+════════════════════════════════════════════════════ -->
+<section id="how-it-works">
+  <div class="sec-inner">
+    <span class="sec-tag">Our Process</span>
+    <h2 class="sec-title">Simple to Start,<br>Built to Last</h2>
+    <p class="sec-sub">Getting started with VirtuAlly Partners is straightforward. We follow a structured process to make sure the support we provide aligns with your goals from day one.</p>
+
+    <div class="steps-grid">
+
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3>Initial Diagnosis</h3>
+        <p>We identify which tasks you need to delegate, your priorities, current tools, and your expectations for the working relationship.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3>Define the Scope</h3>
+        <p>Together we establish responsibilities, frequency, communication channels, delivery timelines, and the level of support that fits your business.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3>Assign &amp; Execute</h3>
+        <p>Virtual support begins according to the agreed plan, with constant communication and full task follow-through from our side.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">04</div>
+        <h3>Continuous Optimization</h3>
+        <p>We regularly review opportunities to improve processes, adopt smarter tools, and automate tasks where it makes sense for your workflow.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     ABOUT
+════════════════════════════════════════════════════ -->
+<section id="about">
+  <div class="sec-inner">
+    <div class="about-grid">
+
+      <!-- Left: Story + Values -->
+      <div>
+        <span class="sec-tag">About Us</span>
+        <h2 class="sec-title">More Than a Service.<br>A Real Operating Ally.</h2>
+        <p class="sec-sub" style="margin-bottom:32px;">
+          VirtuAlly Partners was founded to give growing businesses access to reliable, professional remote support — without the complexity or cost of traditional hiring. We combine skilled human assistance with smart digital tools to deliver practical, organized, and adaptable support tailored to your business.
+        </p>
+
+        <div class="values-list">
+          <div class="val-item">
+            <div class="val-icon">✓</div>
+            <div class="val-text">
+              <h4>Reliability</h4>
+              <p>We honor our commitments, handle your information responsibly, and deliver consistent support.</p>
+            </div>
+          </div>
+          <div class="val-item">
+            <div class="val-icon">⚡</div>
+            <div class="val-text">
+              <h4>Efficiency</h4>
+              <p>We optimize time, simplify processes, and reduce unnecessary operational load for your team.</p>
+            </div>
+          </div>
+          <div class="val-item">
+            <div class="val-icon">🔒</div>
+            <div class="val-text">
+              <h4>Confidentiality</h4>
+              <p>Your information stays protected. We handle every task with full discretion and responsibility.</p>
+            </div>
+          </div>
+          <div class="val-item">
+            <div class="val-icon">🔄</div>
+            <div class="val-text">
+              <h4>Continuous Improvement</h4>
+              <p>We integrate new tools and AI-powered automations to keep raising the quality of our service.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Results panel -->
+      <div class="about-visual">
+        <h3>What You Can Expect</h3>
+        <p>Real results that free up your time and improve how your business runs every day.</p>
+        <div class="results-list">
+          <div class="res-item">
+            <span class="res-check">✓</span>
+            <span>Less time on repetitive administrative tasks</span>
+          </div>
+          <div class="res-item">
+            <span class="res-check">✓</span>
+            <span>Better daily organization and follow-through</span>
+          </div>
+          <div class="res-item">
+            <span class="res-check">✓</span>
+            <span>Consistent client and vendor communication</span>
+          </div>
+          <div class="res-item">
+            <span class="res-check">✓</span>
+            <span>Greater operational continuity</span>
+          </div>
+          <div class="res-item">
+            <span class="res-check">✓</span>
+            <span>More professional internal processes</span>
+          </div>
+          <div class="res-item">
+            <span class="res-check">✓</span>
+            <span>More focus on sales, strategy, and growth</span>
+          </div>
+          <div class="res-item">
+            <span class="res-check">✓</span>
+            <span>Reduced operational load for founders and executives</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     WHO WE SERVE
+════════════════════════════════════════════════════ -->
+<section id="clients">
+  <div class="sec-inner">
+    <span class="sec-tag">Who We Serve</span>
+    <h2 class="sec-title">Built for Builders,<br>Makers &amp; Doers</h2>
+    <p class="sec-sub">VirtuAlly Partners is designed for people and businesses that need real support — without the overhead of a full-time hire.</p>
+
+    <div class="clients-grid">
+      <div class="client-card">
+        <span class="ci">🚀</span>
+        <p>Entrepreneurs</p>
+      </div>
+      <div class="client-card">
+        <span class="ci">💡</span>
+        <p>Startups</p>
+      </div>
+      <div class="client-card">
+        <span class="ci">👤</span>
+        <p>Solopreneurs</p>
+      </div>
+      <div class="client-card">
+        <span class="ci">💼</span>
+        <p>Independent Executives</p>
+      </div>
+      <div class="client-card">
+        <span class="ci">🏢</span>
+        <p>Small Businesses</p>
+      </div>
+      <div class="client-card">
+        <span class="ci">📈</span>
+        <p>Growing Teams</p>
+      </div>
+      <div class="client-card">
+        <span class="ci">🎯</span>
+        <p>Consultants &amp; Coaches</p>
+      </div>
+      <div class="client-card">
+        <span class="ci">🔧</span>
+        <p>Ops-Heavy Businesses</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     QUOTE / CONTACT
+════════════════════════════════════════════════════ -->
+<section id="contact">
+  <div class="sec-inner">
+    <span class="sec-tag" style="background:rgba(0,176,200,.18); color:#00B0C8;">Request a Quote</span>
+    <h2 class="sec-title">Ready to Delegate?<br>Let's Talk.</h2>
+    <p class="sec-sub">Fill out the form below and we'll get back to you within 24 hours with a personalized proposal.</p>
+
+    <div class="form-shell">
+      <form id="quoteForm" novalidate>
+        <div class="form-row">
+          <div class="fgroup">
+            <label for="firstName">First Name *</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Jane" required />
+          </div>
+          <div class="fgroup">
+            <label for="lastName">Last Name *</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Smith" required />
+          </div>
+        </div>
+
+        <div class="fgroup">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" placeholder="jane@yourcompany.com" required />
+        </div>
+
+        <div class="fgroup">
+          <label for="business">Business Name</label>
+          <input type="text" id="business" name="business" placeholder="Your company name (optional)" />
+        </div>
+
+        <div class="fgroup">
+          <label for="service">Service You're Interested In *</label>
+          <select id="service" name="service" required>
+            <option value="" disabled selected>Select a service...</option>
+            <option value="admin">Administrative Support</option>
+            <option value="email">Email &amp; Calendar Management</option>
+            <option value="customer">Customer Support &amp; Operations</option>
+            <option value="data">Data Entry &amp; Information Management</option>
+            <option value="social">Marketing &amp; Social Media Support</option>
+            <option value="vendor">Vendor &amp; Task Coordination</option>
+            <option value="automation">Automation &amp; AI-Powered Tools</option>
+            <option value="multiple">Multiple Services</option>
+            <option value="unsure">Not sure yet — I need guidance</option>
+          </select>
+        </div>
+
+        <div class="fgroup">
+          <label for="message">Tell us about your needs</label>
+          <textarea
+            id="message" name="message"
+            placeholder="What tasks take up most of your time? What would you like to delegate?"
+          ></textarea>
+        </div>
+
+        <button type="submit" class="form-submit">Send My Quote Request &rarr;</button>
+      </form>
+
+      <div id="successMsg">
+        ✓ Your request was sent! We'll be in touch within 24 hours.
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+
+      <div class="footer-brand">
+        <img
+          src="virtually-partners-logo.png"
+          alt="VirtuAlly Partners"
+          onerror="this.style.display='none';"
+        />
+        <p>Reliable virtual assistance for entrepreneurs, startups, and small businesses. We handle the operations — you handle the growth.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#clients">Who We Serve</a></li>
+          <li><a href="#contact">Get a Quote</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Administrative Support</a></li>
+          <li><a href="#services">Email &amp; Calendar</a></li>
+          <li><a href="#services">Customer Support</a></li>
+          <li><a href="#services">Data Entry</a></li>
+          <li><a href="#services">Social Media</a></li>
+          <li><a href="#services">Automation &amp; AI</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 VirtuAlly Partners. All rights reserved.</p>
+      <p>
+        <a href="https://www.VirtuAllyPartners.com" target="_blank" rel="noopener">
+          www.VirtuAllyPartners.com
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════════════════════ -->
+<script>
+  /* ── Mobile menu ── */
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileMenu   = document.getElementById('mobileMenu');
+
+  hamburgerBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    mobileMenu.classList.toggle('open');
+  });
+
+  // Close menu when a link is clicked
+  mobileMenu.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      mobileMenu.classList.remove('open');
+    });
+  });
+
+  // Close menu on outside click
+  document.addEventListener('click', function (e) {
+    if (!mobileMenu.contains(e.target) && e.target !== hamburgerBtn) {
+      mobileMenu.classList.remove('open');
+    }
+  });
+
+  /* ── Scroll shadow on navbar ── */
+  window.addEventListener('scroll', function () {
+    const nav = document.getElementById('navbar');
+    nav.style.boxShadow = window.scrollY > 24
+      ? '0 4px 32px rgba(0,0,0,.18)'
+      : '0 2px 20px rgba(0,0,0,.07)';
+  });
+
+  /* ── Quote form ── */
+  document.getElementById('quoteForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var form = this;
+    var valid = true;
+
+    // Clear previous errors
+    form.querySelectorAll('.field-error').forEach(function (el) {
+      el.classList.remove('field-error');
+    });
+
+    // Validate required fields
+    form.querySelectorAll('[required]').forEach(function (field) {
+      if (!field.value.trim()) {
+        field.classList.add('field-error');
+        valid = false;
+      }
+    });
+
+    // Basic email format check
+    var emailField = document.getElementById('email');
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (emailField.value.trim() && !emailRegex.test(emailField.value.trim())) {
+      emailField.classList.add('field-error');
+      valid = false;
+    }
+
+    if (!valid) return;
+
+    /*
+      ── WordPress integration note ──────────────────────────────────
+      To send form data to a real email address:
+        Option 1 — Contact Form 7: replace this <form> with a CF7 shortcode.
+        Option 2 — WPForms / Elementor Forms: rebuild this form in the plugin.
+        Option 3 — Custom AJAX: replace the lines below with a fetch() call
+                   to your WP REST endpoint or a third-party service (e.g. Formspree).
+      ────────────────────────────────────────────────────────────────
+    */
+
+    // Show success message
+    form.style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+  });
+
+  // Remove error highlight on input
+  document.querySelectorAll('.fgroup input, .fgroup select, .fgroup textarea')
+    .forEach(function (el) {
+      el.addEventListener('input', function () {
+        this.classList.remove('field-error');
+      });
+    });
+</script>
+
+</body>
+</html>
