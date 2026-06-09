@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VirtuAlly Partners – Virtual Assistant Services</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ── RESET & TOKENS ─────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --p:   #00B0C8;
+      --s:   #098FA0;
+      --d:   #0D1821;
+      --w:   #FFFFFF;
+      --bg:  #F5FBFC;
+      --bd:  #D8EFF2;
+      --tx:  #1E2D3A;
+      --mu:  #5F7485;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Host Grotesk', sans-serif;
+      color: var(--tx);
+      background: var(--w);
+      line-height: 1.7;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Source Serif 4', serif; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; }
+
+    /* ── NAV ─────────────────────────────────────────────── */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--bd);
+      display: flex; align-items: center; justify-content: space-between;
+      height: 70px; padding: 0 6%;
+      transition: border-color .3s;
+    }
+
+    .n-logo img {
+      height: 40px; width: auto;
+    }
+    .n-logo-text {
+      display: none;
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--d);
+    }
+    .n-logo-text em { font-style: normal; color: var(--p); }
+
+    .n-links {
+      display: flex; align-items: center; gap: 36px; list-style: none;
+    }
+    .n-links a {
+      font-size: .9rem; font-weight: 500; color: var(--tx);
+      position: relative; padding-bottom: 3px;
+      transition: color .2s;
+    }
+    .n-links a::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px; background: var(--p);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .25s;
+    }
+    .n-links a:hover { color: var(--p); }
+    .n-links a:hover::after { transform: scaleX(1); }
+
+    .n-cta {
+      background: var(--d); color: var(--w) !important;
+      padding: 10px 22px; border-radius: 6px;
+      font-size: .9rem; font-weight: 700;
+      transition: background .2s !important;
+    }
+    .n-cta:hover { background: var(--p) !important; }
+    .n-cta::after { display: none !important; }
+
+    .n-burger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 4px;
+    }
+    .n-burger span {
+      width: 22px; height: 2px; background: var(--d);
+      display: block; border-radius: 2px; transition: all .3s;
+    }
+
+    #n-mobile {
+      display: none; flex-direction: column;
+      position: fixed; top: 70px; left: 0; right: 0; z-index: 998;
+      background: var(--w);
+      border-bottom: 1px solid var(--bd);
+      padding: 6px 6% 20px;
+    }
+    #n-mobile.open { display: flex; }
+    #n-mobile a {
+      padding: 13px 0; font-weight: 500; color: var(--tx);
+      border-bottom: 1px solid #f0f4f5; font-size: .97rem;
+      transition: color .2s;
+    }
+    #n-mobile a:last-child { border: none; color: var(--p); font-weight: 700; }
+    #n-mobile a:hover { color: var(--p); }
+
+    /* ── HERO ─────────────────────────────────────────────── */
+    #home {
+      min-height: 100vh;
+      background: var(--w);
+      display: flex; align-items: center;
+      padding: 110px 6% 72px;
+      position: relative; overflow: hidden;
+    }
+
+    /* decorative shapes */
+    #home::before {
+      content: '';
+      position: absolute; top: -80px; right: -80px;
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, rgba(0,176,200,.1) 0%, transparent 68%);
+      border-radius: 50%; pointer-events: none;
+    }
+    #home::after {
+      content: '';
+      position: absolute; bottom: -60px; left: 5%;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(9,143,160,.07) 0%, transparent 68%);
+      border-radius: 50%; pointer-events: none;
+    }
+
+    .hero-wrap {
+      max-width: 1160px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1.1fr 1fr;
+      gap: 64px; align-items: center;
+      position: relative; z-index: 1;
+    }
+
+    .h-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,176,200,.09); border: 1px solid rgba(0,176,200,.25);
+      color: var(--s); padding: 5px 14px; border-radius: 4px;
+      font-size: .76rem; font-weight: 700; letter-spacing: .06em;
+      text-transform: uppercase; margin-bottom: 22px;
+    }
+    .h-eyebrow span { width: 6px; height: 6px; background: var(--p); border-radius: 50%; }
+
+    .h-left h1 {
+      font-size: clamp(2.4rem, 4vw, 3.8rem);
+      color: var(--d); line-height: 1.1;
+      margin-bottom: 20px; font-weight: 700;
+    }
+    .h-left h1 em { font-style: normal; color: var(--p); }
+
+    .h-left p {
+      font-size: 1.08rem; color: var(--mu);
+      max-width: 460px; margin-bottom: 36px; line-height: 1.75;
+    }
+
+    .h-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .btn-fill {
+      background: var(--p); color: var(--w);
+      padding: 14px 28px; border-radius: 7px;
+      font-family: 'Host Grotesk', sans-serif;
+      font-weight: 700; font-size: .97rem;
+      border: none; cursor: pointer; display: inline-block;
+      transition: background .2s, transform .2s, box-shadow .2s;
+    }
+    .btn-fill:hover {
+      background: var(--s); transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(0,176,200,.3);
+    }
+
+    .btn-ghost {
+      background: transparent; color: var(--d);
+      padding: 13px 26px; border-radius: 7px;
+      font-family: 'Host Grotesk', sans-serif;
+      font-weight: 600; font-size: .97rem;
+      border: 1.5px solid var(--bd); cursor: pointer;
+      display: inline-block; transition: border-color .2s, color .2s;
+    }
+    .btn-ghost:hover { border-color: var(--p); color: var(--p); }
+
+    /* right panel */
+    .h-panel {
+      background: var(--d); border-radius: 20px;
+      padding: 36px 32px; position: relative; overflow: hidden;
+    }
+    .h-panel::before {
+      content: '';
+      position: absolute; top: -40px; right: -40px;
+      width: 180px; height: 180px;
+      background: rgba(0,176,200,.12); border-radius: 50%;
+    }
+    .h-panel-title {
+      color: rgba(255,255,255,.5); font-size: .75rem;
+      font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; margin-bottom: 20px;
+    }
+    .h-list { display: flex; flex-direction: column; gap: 11px; }
+    .h-list-item {
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 10px; padding: 13px 16px;
+    }
+    .h-ic {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: linear-gradient(135deg,var(--p),var(--s));
+      display: flex; align-items: center; justify-content: center;
+      font-size: .95rem; flex-shrink: 0;
+    }
+    .h-list-item span { color: rgba(255,255,255,.85); font-size: .88rem; font-weight: 500; }
+
+    /* ── BAND ─────────────────────────────────────────────── */
+    #band {
+      background: var(--p);
+      padding: 22px 6%;
+      overflow: hidden;
+    }
+    .band-inner {
+      max-width: 1160px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 12px; text-align: center;
+    }
+    .band-item { padding: 6px; }
+    .band-num {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.7rem; font-weight: 700;
+      color: var(--w); display: block;
+    }
+    .band-lbl { color: rgba(255,255,255,.8); font-size: .8rem; }
+
+    /* ── SHARED ───────────────────────────────────────────── */
+    .sec { padding: 88px 6%; }
+    .sec-in { max-width: 1160px; margin: 0 auto; }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--s); font-size: .76rem; font-weight: 700;
+      letter-spacing: .08em; text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .sec-h {
+      font-size: clamp(1.9rem, 2.8vw, 2.8rem);
+      color: var(--d); line-height: 1.2; margin-bottom: 14px;
+    }
+    .sec-sub {
+      font-size: 1.02rem; color: var(--mu); max-width: 520px;
+      line-height: 1.75; margin-bottom: 52px;
+    }
+
+    /* ── SERVICES ─────────────────────────────────────────── */
+    #services { background: var(--bg); }
+
+    .svc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .svc-card {
+      background: var(--w); border-radius: 14px;
+      border: 1px solid var(--bd);
+      padding: 28px 26px;
+      transition: box-shadow .3s, transform .3s, border-color .3s;
+      cursor: default;
+    }
+    .svc-card:hover {
+      box-shadow: 0 12px 36px rgba(0,176,200,.1);
+      transform: translateY(-4px);
+      border-color: var(--p);
+    }
+    .svc-num {
+      font-family: 'Source Serif 4', serif;
+      font-size: .8rem; font-weight: 700;
+      color: var(--p); letter-spacing: .06em;
+      margin-bottom: 12px; display: block;
+    }
+    .svc-card h3 {
+      font-size: 1.08rem; color: var(--d);
+      margin-bottom: 10px;
+    }
+    .svc-card p { font-size: .88rem; color: var(--mu); line-height: 1.7; }
+    .svc-bar {
+      width: 32px; height: 3px;
+      background: var(--p); border-radius: 2px;
+      margin-top: 18px;
+      transition: width .3s;
+    }
+    .svc-card:hover .svc-bar { width: 56px; }
+
+    /* ── HOW IT WORKS ─────────────────────────────────────── */
+    #how { background: var(--w); }
+
+    .steps-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+    .steps-row::before {
+      content: '';
+      position: absolute;
+      top: 27px; left: calc(12.5% + 10px); right: calc(12.5% + 10px);
+      height: 2px;
+      background: linear-gradient(90deg, var(--p), var(--s));
+      z-index: 0;
+    }
+
+    .step {
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; padding: 0 16px;
+      position: relative; z-index: 1;
+    }
+    .step-circle {
+      width: 54px; height: 54px;
+      background: var(--w); border: 2px solid var(--p);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.1rem; font-weight: 700; color: var(--p);
+      transition: background .2s, color .2s;
+    }
+    .step:hover .step-circle {
+      background: var(--p); color: var(--w);
+    }
+    .step h3 {
+      font-size: 1rem; color: var(--d); margin-bottom: 10px;
+    }
+    .step p { font-size: .87rem; color: var(--mu); line-height: 1.65; }
+
+    /* ── WHY US ───────────────────────────────────────────── */
+    #why {
+      background: var(--d);
+    }
+    #why .eyebrow { color: var(--p); }
+    #why .sec-h { color: var(--w); }
+    #why .sec-sub { color: rgba(255,255,255,.6); }
+
+    .why-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+    .why-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 14px; padding: 28px 24px;
+      transition: background .3s, border-color .3s;
+    }
+    .why-card:hover {
+      background: rgba(0,176,200,.07);
+      border-color: rgba(0,176,200,.3);
+    }
+    .why-dot {
+      width: 10px; height: 10px;
+      background: var(--p); border-radius: 50%;
+      margin-bottom: 16px;
+    }
+    .why-card h3 { font-size: 1.05rem; color: var(--w); margin-bottom: 10px; }
+    .why-card p { font-size: .87rem; color: rgba(255,255,255,.58); line-height: 1.7; }
+
+    /* ── WHO WE SERVE ─────────────────────────────────────── */
+    #serve { background: var(--bg); }
+
+    .serve-wrap {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;
+    }
+    .serve-copy .sec-sub { margin-bottom: 0; }
+
+    .serve-tags {
+      display: flex; flex-wrap: wrap; gap: 12px;
+    }
+    .s-tag {
+      background: var(--w); border: 1.5px solid var(--bd);
+      color: var(--tx); padding: 10px 18px; border-radius: 100px;
+      font-weight: 600; font-size: .9rem;
+      transition: background .2s, border-color .2s, color .2s;
+    }
+    .s-tag:hover {
+      background: var(--p); border-color: var(--p); color: var(--w);
+    }
+
+    /* ── RESULTS ──────────────────────────────────────────── */
+    #results { background: var(--w); }
+
+    .results-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+    }
+    .r-item {
+      display: flex; align-items: flex-start; gap: 14px;
+      background: var(--bg); border: 1px solid var(--bd);
+      border-radius: 12px; padding: 20px;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .r-item:hover {
+      border-color: var(--p);
+      box-shadow: 0 4px 20px rgba(0,176,200,.08);
+    }
+    .r-check {
+      width: 28px; height: 28px; flex-shrink: 0;
+      background: rgba(0,176,200,.12);
+      border-radius: 6px; display: flex; align-items: center;
+      justify-content: center; color: var(--p); font-size: .85rem;
+      font-weight: 700;
+    }
+    .r-item p { font-size: .92rem; color: var(--tx); font-weight: 500; }
+
+    /* ── QUOTE FORM ───────────────────────────────────────── */
+    #quote {
+      background: var(--d);
+      padding: 88px 6%;
+    }
+    #quote .eyebrow { color: var(--p); }
+    #quote .sec-h { color: var(--w); }
+    #quote .sec-sub { color: rgba(255,255,255,.6); }
+
+    .form-card {
+      max-width: 660px; margin: 0 auto;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 20px; padding: 44px 40px;
+      backdrop-filter: blur(10px);
+    }
+    .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .fg { margin-bottom: 18px; }
+    .fg label {
+      display: block; color: rgba(255,255,255,.72);
+      font-size: .83rem; font-weight: 600; margin-bottom: 7px;
+    }
+    .fg input, .fg select, .fg textarea {
+      width: 100%; padding: 11px 15px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 8px; color: var(--w);
+      font-family: 'Host Grotesk', sans-serif; font-size: .93rem;
+      transition: border-color .2s, background .2s; outline: none;
+    }
+    .fg input::placeholder, .fg textarea::placeholder { color: rgba(255,255,255,.28); }
+    .fg input:focus, .fg select:focus, .fg textarea:focus {
+      border-color: var(--p); background: rgba(255,255,255,.1);
+    }
+    .fg select option { background: var(--d); color: var(--w); }
+    .fg textarea { resize: vertical; min-height: 100px; }
+    .f-err { border-color: #ff6b6b !important; }
+
+    .f-submit {
+      width: 100%; padding: 15px;
+      background: var(--p); color: var(--w);
+      border: none; border-radius: 8px; cursor: pointer;
+      font-family: 'Host Grotesk', sans-serif;
+      font-size: 1rem; font-weight: 700; margin-top: 8px;
+      transition: background .2s, transform .2s, box-shadow .2s;
+    }
+    .f-submit:hover {
+      background: var(--s); transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(0,176,200,.3);
+    }
+
+    #f-success {
+      display: none; text-align: center;
+      padding: 36px 20px; color: var(--p);
+      font-size: 1.1rem; font-weight: 600; line-height: 1.6;
+    }
+
+    /* ── FOOTER ───────────────────────────────────────────── */
+    footer {
+      background: #07101a;
+      color: rgba(255,255,255,.52);
+      padding: 52px 6% 28px;
+    }
+    .ft-in { max-width: 1160px; margin: 0 auto; }
+    .ft-top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px; margin-bottom: 40px;
+    }
+    .ft-brand img { height: 36px; margin-bottom: 14px; }
+    .ft-brand-text {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--w); margin-bottom: 12px;
+    }
+    .ft-brand-text em { font-style: normal; color: var(--p); }
+    .ft-brand p { font-size: .87rem; line-height: 1.75; max-width: 260px; }
+    .ft-col h5 {
+      font-family: 'Source Serif 4', serif;
+      color: var(--w); font-size: .95rem; margin-bottom: 14px;
+    }
+    .ft-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .ft-col ul a {
+      color: rgba(255,255,255,.52); font-size: .87rem;
+      transition: color .2s;
+    }
+    .ft-col ul a:hover { color: var(--p); }
+    .ft-bottom {
+      border-top: 1px solid rgba(255,255,255,.07);
+      padding-top: 22px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: .82rem; flex-wrap: wrap; gap: 8px;
+    }
+    .ft-bottom a { color: var(--p); }
+
+    /* ── RESPONSIVE ───────────────────────────────────────── */
+    @media (max-width: 980px) {
+      .hero-wrap {
+        grid-template-columns: 1fr !important;
+      }
+      .h-left { text-align: center; }
+      .h-eyebrow { display: inline-flex; }
+      .h-left p { margin-left: auto; margin-right: auto; }
+      .h-btns { justify-content: center; }
+      .h-panel { display: none !important; }
+
+      .svc-grid { grid-template-columns: repeat(2, 1fr); }
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+      .serve-wrap { grid-template-columns: 1fr; }
+
+      .band-inner { grid-template-columns: repeat(2, 1fr); }
+
+      .ft-top { grid-template-columns: 1fr 1fr; }
+      .ft-brand { grid-column: 1 / -1; }
+
+      .steps-row::before { display: none; }
+      .steps-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .n-links { display: none; }
+      .n-burger { display: flex; }
+      .sec { padding: 64px 6%; }
+      #quote { padding: 64px 6%; }
+      #home { padding: 100px 6% 56px; }
+      .h-left h1 { font-size: clamp(1.9rem, 8vw, 2.6rem); }
+      .h-eyebrow { font-size: .7rem; }
+
+      .svc-grid { grid-template-columns: 1fr; }
+      .steps-row { grid-template-columns: 1fr; gap: 24px; }
+      .why-grid { grid-template-columns: 1fr; }
+      .results-grid { grid-template-columns: 1fr; }
+      .f-row { grid-template-columns: 1fr; }
+      .form-card { padding: 28px 20px; }
+    }
+
+    @media (max-width: 520px) {
+      .band-inner { grid-template-columns: repeat(2, 1fr); }
+      .ft-top { grid-template-columns: 1fr; }
+      .ft-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     NAVIGATION
+══════════════════════════════════════ -->
+<nav id="nav">
+  <a href="#home" class="n-logo">
+    <img
+      src="virtually-partners-logo.png"
+      alt="VirtuAlly Partners"
+      onerror="this.style.display='none'; document.querySelector('.n-logo-text').style.display='block';"
+    />
+    <span class="n-logo-text">Virtu<em>Ally</em> Partners</span>
+  </a>
+
+  <ul class="n-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#why">About</a></li>
+    <li><a href="#serve">Who We Serve</a></li>
+    <li><a href="#quote" class="n-cta">Get a Quote</a></li>
+  </ul>
+
+  <button class="n-burger" id="burger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div id="n-mobile">
+  <a href="#home">Home</a>
+  <a href="#services">Services</a>
+  <a href="#how">How It Works</a>
+  <a href="#why">About</a>
+  <a href="#serve">Who We Serve</a>
+  <a href="#quote">Get a Quote &rarr;</a>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<section id="home">
+  <div class="hero-wrap">
+
+    <div class="h-left">
+      <div class="h-eyebrow">
+        <span></span> Remote Virtual Assistance for US Businesses
+      </div>
+      <h1>Delegate Smarter.<br>Grow <em>Faster.</em></h1>
+      <p>VirtuAlly Partners handles your daily administrative, operational, and digital tasks — so you can focus on building the business, not running it.</p>
+      <div class="h-btns">
+        <a href="#quote" class="btn-fill">Request a Free Quote</a>
+        <a href="#services" class="btn-ghost">See What We Do</a>
+      </div>
+    </div>
+
+    <div class="h-panel">
+      <p class="h-panel-title">Tasks we take off your plate</p>
+      <div class="h-list">
+        <div class="h-list-item">
+          <div class="h-ic">📅</div>
+          <span>Email &amp; calendar management</span>
+        </div>
+        <div class="h-list-item">
+          <div class="h-ic">📊</div>
+          <span>Data entry &amp; reporting</span>
+        </div>
+        <div class="h-list-item">
+          <div class="h-ic">💬</div>
+          <span>Customer follow-ups &amp; support</span>
+        </div>
+        <div class="h-list-item">
+          <div class="h-ic">📱</div>
+          <span>Social media coordination</span>
+        </div>
+        <div class="h-list-item">
+          <div class="h-ic">⚙️</div>
+          <span>Workflow automation &amp; AI tools</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     BAND / STATS
+══════════════════════════════════════ -->
+<div id="band">
+  <div class="band-inner">
+    <div class="band-item">
+      <span class="band-num">From $5/hr</span>
+      <p class="band-lbl">Accessible, flexible pricing</p>
+    </div>
+    <div class="band-item">
+      <span class="band-num">100% Remote</span>
+      <p class="band-lbl">No office, no overhead</p>
+    </div>
+    <div class="band-item">
+      <span class="band-num">7 Services</span>
+      <p class="band-lbl">Across admin, ops &amp; digital</p>
+    </div>
+    <div class="band-item">
+      <span class="band-num">No Contracts</span>
+      <p class="band-lbl">Flexible, month-to-month</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     SERVICES
+══════════════════════════════════════ -->
+<section id="services" class="sec">
+  <div class="sec-in">
+    <span class="eyebrow">What We Do</span>
+    <h2 class="sec-h">Seven Ways We Free Up<br>Your Time</h2>
+    <p class="sec-sub">Every service is designed to take operational weight off your shoulders — so you can put your energy where it matters most.</p>
+
+    <div class="svc-grid">
+
+      <div class="svc-card">
+        <span class="svc-num">01</span>
+        <h3>Administrative Support</h3>
+        <p>Document management, database updates, internal reporting, digital file organization, and day-to-day process support — handled consistently and accurately.</p>
+        <div class="svc-bar"></div>
+      </div>
+
+      <div class="svc-card">
+        <span class="svc-num">02</span>
+        <h3>Email &amp; Calendar Management</h3>
+        <p>Inbox organization, meeting scheduling, appointment confirmation, reminders, and daily commitment tracking so nothing ever falls through the cracks.</p>
+        <div class="svc-bar"></div>
+      </div>
+
+      <div class="svc-card">
+        <span class="svc-num">03</span>
+        <h3>Customer Support &amp; Operations</h3>
+        <p>Client communication, request follow-ups, basic responses, and operational coordination to keep your service delivery timely and professional.</p>
+        <div class="svc-bar"></div>
+      </div>
+
+      <div class="svc-card">
+        <span class="svc-num">04</span>
+        <h3>Data Entry &amp; Information Management</h3>
+        <p>Data recording, reviewing, and structuring across spreadsheets, CRMs, and internal platforms — always accurate and properly organized.</p>
+        <div class="svc-bar"></div>
+      </div>
+
+      <div class="svc-card">
+        <span class="svc-num">05</span>
+        <h3>Marketing &amp; Social Media Support</h3>
+        <p>Content scheduling, caption drafting, engagement tracking, basic research, and material coordination to keep your digital presence running smoothly.</p>
+        <div class="svc-bar"></div>
+      </div>
+
+      <div class="svc-card">
+        <span class="svc-num">06</span>
+        <h3>Vendor &amp; Task Coordination</h3>
+        <p>Supplier follow-ups, invoice tracking, delivery coordination, and operational pending management to keep your internal processes moving forward.</p>
+        <div class="svc-bar"></div>
+      </div>
+
+      <div class="svc-card">
+        <span class="svc-num">07</span>
+        <h3>Automation &amp; AI-Powered Tools</h3>
+        <p>Implementation of digital tools and AI-powered workflows that streamline repetitive tasks — always with human oversight and a practical, results-driven focus.</p>
+        <div class="svc-bar"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     HOW IT WORKS
+══════════════════════════════════════ -->
+<section id="how" class="sec">
+  <div class="sec-in">
+    <span class="eyebrow">Our Process</span>
+    <h2 class="sec-h">Four Steps to<br>Operational Clarity</h2>
+    <p class="sec-sub">From your first conversation to ongoing support — our process is built to be simple, structured, and fully adapted to your business.</p>
+
+    <div class="steps-row">
+
+      <div class="step">
+        <div class="step-circle">01</div>
+        <h3>Initial Diagnosis</h3>
+        <p>We identify the tasks you need to delegate, your current tools, priorities, and what an ideal working relationship looks like for you.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-circle">02</div>
+        <h3>Scope Definition</h3>
+        <p>We establish responsibilities, communication channels, delivery timelines, and the exact level of support your business requires.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-circle">03</div>
+        <h3>Execution Begins</h3>
+        <p>Virtual support starts immediately according to the agreed plan, with constant communication and full follow-through from our team.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-circle">04</div>
+        <h3>Ongoing Optimization</h3>
+        <p>We regularly review opportunities to improve processes, adopt better tools, and automate where it genuinely benefits your workflow.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     WHY US / ABOUT
+══════════════════════════════════════ -->
+<section id="why" class="sec">
+  <div class="sec-in">
+    <span class="eyebrow">Why VirtuAlly Partners</span>
+    <h2 class="sec-h">Built Different.<br>Delivered with Care.</h2>
+    <p class="sec-sub">We don't just complete tasks — we become a reliable extension of your team. Here's what sets us apart.</p>
+
+    <div class="why-grid">
+
+      <div class="why-card">
+        <div class="why-dot"></div>
+        <h3>Reliability First</h3>
+        <p>We honor every commitment, manage your information with full responsibility, and deliver consistent support you can count on every week.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-dot"></div>
+        <h3>True Flexibility</h3>
+        <p>Our model adapts to your volume, schedule, and growth stage. Scale support up or down without contracts, penalties, or overhead.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-dot"></div>
+        <h3>Accessible Pricing</h3>
+        <p>Starting from $5/hr, our referential rate makes professional virtual assistance accessible for early-stage businesses and independent professionals.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-dot"></div>
+        <h3>Human + Digital</h3>
+        <p>We combine skilled human assistance with AI-powered tools and digital automation — giving you the best of both for greater speed and quality.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-dot"></div>
+        <h3>Full Confidentiality</h3>
+        <p>Your data and business information are handled with complete discretion. We treat your business as if it were our own.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-dot"></div>
+        <h3>Results-Focused</h3>
+        <p>Every service we provide is aimed at one outcome: freeing up your time so you can focus on growth, strategy, and the work that moves your business forward.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     WHO WE SERVE
+══════════════════════════════════════ -->
+<section id="serve" class="sec">
+  <div class="sec-in">
+    <div class="serve-wrap">
+
+      <div class="serve-copy">
+        <span class="eyebrow">Who We Serve</span>
+        <h2 class="sec-h">Made for People<br>Who Are Building Something.</h2>
+        <p class="sec-sub">VirtuAlly Partners is designed for businesses and professionals who need reliable support — without the cost or commitment of a full-time hire. If you're wearing too many hats, we're here to take a few off.</p>
+      </div>
+
+      <div class="serve-tags">
+        <span class="s-tag">🚀 Entrepreneurs</span>
+        <span class="s-tag">💡 Startups</span>
+        <span class="s-tag">👤 Solopreneurs</span>
+        <span class="s-tag">💼 Independent Executives</span>
+        <span class="s-tag">🏢 Small Businesses</span>
+        <span class="s-tag">📈 Growing Teams</span>
+        <span class="s-tag">🎯 Consultants &amp; Coaches</span>
+        <span class="s-tag">🔧 Ops-Heavy Businesses</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     RESULTS
+══════════════════════════════════════ -->
+<section id="results" class="sec">
+  <div class="sec-in">
+    <span class="eyebrow">What You Gain</span>
+    <h2 class="sec-h">Real Outcomes for<br>Real Businesses</h2>
+    <p class="sec-sub">When you delegate smarter, everything else gets easier. Here's what our clients are designed to experience from day one.</p>
+
+    <div class="results-grid">
+      <div class="r-item">
+        <div class="r-check">✓</div>
+        <p>Less time spent on repetitive administrative tasks</p>
+      </div>
+      <div class="r-item">
+        <div class="r-check">✓</div>
+        <p>Better organization in your day-to-day business management</p>
+      </div>
+      <div class="r-item">
+        <div class="r-check">✓</div>
+        <p>Consistent follow-up on emails, meetings, and client requests</p>
+      </div>
+      <div class="r-item">
+        <div class="r-check">✓</div>
+        <p>Greater operational continuity — nothing gets dropped</p>
+      </div>
+      <div class="r-item">
+        <div class="r-check">✓</div>
+        <p>More professional and structured internal processes</p>
+      </div>
+      <div class="r-item">
+        <div class="r-check">✓</div>
+        <p>Faster, more reliable responses to clients and vendors</p>
+      </div>
+      <div class="r-item">
+        <div class="r-check">✓</div>
+        <p>Less operational load on founders, owners, and executives</p>
+      </div>
+      <div class="r-item">
+        <div class="r-check">✓</div>
+        <p>More focus on sales, strategy, and growing your business</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     QUOTE FORM
+══════════════════════════════════════ -->
+<section id="quote">
+  <div class="sec-in" style="text-align:center; max-width:1160px; margin:0 auto;">
+    <span class="eyebrow">Get a Quote</span>
+    <h2 class="sec-h" style="color:#fff;">Ready to Stop Doing<br>Everything Yourself?</h2>
+    <p class="sec-sub" style="margin:0 auto 48px; color:rgba(255,255,255,.6);">
+      Fill out the form and we'll get back to you within 24 hours with a personalized proposal tailored to your needs.
+    </p>
+
+    <div class="form-card">
+      <form id="qForm" novalidate>
+
+        <div class="f-row">
+          <div class="fg">
+            <label for="fn">First Name *</label>
+            <input type="text" id="fn" name="firstName" placeholder="Jane" required />
+          </div>
+          <div class="fg">
+            <label for="ln">Last Name *</label>
+            <input type="text" id="ln" name="lastName" placeholder="Smith" required />
+          </div>
+        </div>
+
+        <div class="fg">
+          <label for="em">Email Address *</label>
+          <input type="email" id="em" name="email" placeholder="jane@yourcompany.com" required />
+        </div>
+
+        <div class="fg">
+          <label for="biz">Business Name</label>
+          <input type="text" id="biz" name="business" placeholder="Your company (optional)" />
+        </div>
+
+        <div class="fg">
+          <label for="svc">Service You're Interested In *</label>
+          <select id="svc" name="service" required>
+            <option value="" disabled selected>Choose a service...</option>
+            <option value="admin">Administrative Support</option>
+            <option value="email">Email &amp; Calendar Management</option>
+            <option value="customer">Customer Support &amp; Operations</option>
+            <option value="data">Data Entry &amp; Information Management</option>
+            <option value="social">Marketing &amp; Social Media Support</option>
+            <option value="vendor">Vendor &amp; Task Coordination</option>
+            <option value="automation">Automation &amp; AI-Powered Tools</option>
+            <option value="multiple">Multiple Services</option>
+            <option value="unsure">Not sure yet — I need guidance</option>
+          </select>
+        </div>
+
+        <div class="fg">
+          <label for="msg">Tell us about your needs</label>
+          <textarea id="msg" name="message" placeholder="What takes up most of your time? What would you love to delegate?"></textarea>
+        </div>
+
+        <button type="submit" class="f-submit">Send My Quote Request &rarr;</button>
+
+      </form>
+
+      <div id="f-success">
+        ✓ Your request was received!<br>We'll be in touch within 24 hours.
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+<footer>
+  <div class="ft-in">
+    <div class="ft-top">
+
+      <div class="ft-brand">
+        <img
+          src="virtually-partners-logo.png"
+          alt="VirtuAlly Partners"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+        />
+        <div class="ft-brand-text" style="display:none;">Virtu<em>Ally</em> Partners</div>
+        <p>Reliable virtual assistance for entrepreneurs, startups, and small businesses across the United States. Delegate better. Grow faster.</p>
+      </div>
+
+      <div class="ft-col">
+        <h5>Navigation</h5>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#why">About</a></li>
+          <li><a href="#serve">Who We Serve</a></li>
+          <li><a href="#quote">Get a Quote</a></li>
+        </ul>
+      </div>
+
+      <div class="ft-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#services">Administrative Support</a></li>
+          <li><a href="#services">Email &amp; Calendar</a></li>
+          <li><a href="#services">Customer Support</a></li>
+          <li><a href="#services">Data Entry</a></li>
+          <li><a href="#services">Social Media</a></li>
+          <li><a href="#services">Automation &amp; AI</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="ft-bottom">
+      <p>&copy; 2026 VirtuAlly Partners. All rights reserved.</p>
+      <p>
+        <a href="https://www.VirtuAllyPartners.com" target="_blank" rel="noopener">
+          www.VirtuAllyPartners.com
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════ -->
+<script>
+  /* ── Mobile nav ── */
+  var burger = document.getElementById('burger');
+  var nmob   = document.getElementById('n-mobile');
+
+  burger.addEventListener('click', function (e) {
+    e.stopPropagation();
+    nmob.classList.toggle('open');
+  });
+
+  nmob.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () { nmob.classList.remove('open'); });
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!nmob.contains(e.target) && e.target !== burger) {
+      nmob.classList.remove('open');
+    }
+  });
+
+  /* ── Nav shadow on scroll ── */
+  window.addEventListener('scroll', function () {
+    document.getElementById('nav').style.borderBottomColor =
+      window.scrollY > 20 ? 'rgba(0,176,200,.25)' : '';
+  });
+
+  /* ── Quote form ── */
+  document.getElementById('qForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var form  = this;
+    var valid = true;
+
+    form.querySelectorAll('.f-err').forEach(function (el) {
+      el.classList.remove('f-err');
+    });
+
+    form.querySelectorAll('[required]').forEach(function (f) {
+      if (!f.value.trim()) { f.classList.add('f-err'); valid = false; }
+    });
+
+    var emailEl = document.getElementById('em');
+    if (emailEl.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
+      emailEl.classList.add('f-err'); valid = false;
+    }
+
+    if (!valid) return;
+
+    /*
+      NOTE FOR WORDPRESS INTEGRATION
+      ─────────────────────────────────────────────────────
+      To receive quote requests by email, replace this <form>
+      with a Contact Form 7 shortcode, or use WPForms /
+      Elementor Forms. Alternatively, add a Formspree action
+      attribute to the <form> tag for no-plugin email delivery.
+      ─────────────────────────────────────────────────────
+    */
+
+    form.style.display = 'none';
+    document.getElementById('f-success').style.display = 'block';
+  });
+
+  document.querySelectorAll('.fg input, .fg select, .fg textarea').forEach(function (el) {
+    el.addEventListener('input', function () { this.classList.remove('f-err'); });
+  });
+</script>
+
+</body>
+</html>
